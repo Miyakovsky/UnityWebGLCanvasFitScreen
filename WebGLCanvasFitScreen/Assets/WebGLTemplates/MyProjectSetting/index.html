@@ -101,7 +101,9 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        const winHeight = window.innerHeight;
+        const barHeight = 18*2;
+        const barHeightMargin = 10*2;
+        const winHeight = window.innerHeight-barHeight-barHeightMargin;
         const winWidth = window.innerWidth;
         const appWidth = "{{{ WIDTH }}}";
         const appHeight = "{{{ HEIGHT }}}";
