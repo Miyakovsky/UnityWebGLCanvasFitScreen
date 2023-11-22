@@ -3,7 +3,7 @@
 
 UnityのWebGLで画面のアスペクト比を固定しつつ、画面サイズをWebブラウザーの表示に合わせて変更するサンプルプロジェクトです。
 
-<img src="images//movie00.gif" width="100%">
+<img src="Images/movie00.gif" width="50%">
 
 DemoURL<br>
 https://miyakovsky.github.io/UnityWebGLCanvasFitScreen/
@@ -15,10 +15,14 @@ WebGLCanvasFitScreen\Assets\WebGLTemplatesフォルダを導入するプロジ�
 
 # 使用方法
 - プロジェクト設定をWebGLにする
-  <img src="images//image00.jpg" width="80%">
+
+  <img src="Images//image00.jpg" width="50%">
+  
 - Project SettingsでResolutinの解像度の設定をする
 - WebGL TemplateをMyProjectSettingに変更する
-  <img src="images//image01.jpg" width="80%">
+
+  <img src="Images//image01.jpg" width="50%">
+  
 - Build And Runを実行して、WebGLで出力して動作確認をする
 
 
