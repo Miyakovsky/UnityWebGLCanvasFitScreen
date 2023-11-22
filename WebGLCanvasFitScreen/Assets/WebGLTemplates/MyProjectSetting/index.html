@@ -54,6 +54,38 @@
         }
         updateBannerVisibility();
       }
+      //ウインドウサイズに合わせキャンバスサイズを変更
+      function fitWindowCanvasSize(){
+        
+        var winHeight = window.innerHeight;
+        const isViewUnderBar = true;
+        if (isViewUnderBar){
+	        const barHeight = 18*2;            //下部のバーサイズ
+	        const barHeightMargin = 10*2;      //下部の追加余白サイズ
+	        winHeight = winHeight - barHeight - barHeightMargin;
+        }
+        const winWidth = window.innerWidth;
+        const appWidth = "{{{ WIDTH }}}";
+        const appHeight = "{{{ HEIGHT }}}";
+        const scale = Math.min((winWidth / appWidth), (winHeight / appHeight));
+        const fixWidth = (appWidth * scale);
+        const fixHeight = (appHeight * scale);
+
+        canvas.style.width = fixWidth + 'px';
+        canvas.style.height = fixHeight + 'px';
+      }
+      //ウインドウのリサイズ時の処理
+      function windowResizeEvent(){
+        var timeoutId = 0;
+        const resizeDelay = 300;  //リサイズが完了したと判断する時間
+        window.onresize = () => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(()=>{
+            //リサイズ終了時の処理
+            fitWindowCanvasSize();
+          }, resizeDelay);
+        };
+      }
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
@@ -100,19 +132,8 @@
         unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        const barHeight = 18*2;
-        const barHeightMargin = 10*2;
-        const winHeight = window.innerHeight-barHeight-barHeightMargin;
-        const winWidth = window.innerWidth;
-        const appWidth = "{{{ WIDTH }}}";
-        const appHeight = "{{{ HEIGHT }}}";
-        const scale = Math.min((winWidth / appWidth), (winHeight / appHeight));
-        const fixWidth = (appWidth * scale);
-        const fixHeight = (appHeight * scale);
-
-        canvas.style.width = fixWidth + 'px';
-        canvas.style.height = fixHeight + 'px';
+        
+        fitWindowCanvasSize();
 
       //  canvas.style.width = "{{{ WIDTH }}}px";
       //  canvas.style.height = "{{{ HEIGHT }}}px";
@@ -136,6 +157,7 @@
         }).catch((message) => {
           alert(message);
         });
+        windowResizeEvent();
       };
       document.body.appendChild(script);
     </script>
